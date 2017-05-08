@@ -1,7 +1,8 @@
 /*
 author: w0lfzhang
-date:
+date: 2017.04
 env: ubuntu 14.04
+gcc -o ospf ospf.c `pkg-config --cflags --libs gtk+-2.0`
 */
 
 #include <sys/types.h>
@@ -56,11 +57,11 @@ gboolean delete_event(GtkWidget *widget, GdkEvent *event, gpointer data);
 
 int main(int argc, char *argv[])
 {
-	int j;
-	for(j = 0; j < NODE; j++)
-	{
-		min_path[j] = (char*)malloc(0x20);
-	}
+    int j;
+    for(j = 0; j < NODE; j++)
+    {
+	    min_path[j] = (char*)malloc(0x20);
+    }
     pthread_t ser_thread;
     pthread_t cli_thread;
    
@@ -89,6 +90,7 @@ int main(int argc, char *argv[])
 
     sleep(15);
 
+    char content[30];
     if (flag == 1)
     {
         GtkWidget *window;
@@ -100,7 +102,7 @@ int main(int argc, char *argv[])
         window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
         gtk_window_set_title(GTK_WINDOW(window), "OSPF PROJECT");
-        gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+        gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_NONE);
         gtk_window_set_default_size(GTK_WINDOW(window), 500, 400);
 
         g_signal_connect(GTK_OBJECT(window), "destroy", GTK_SIGNAL_FUNC(close_app), NULL);
@@ -108,12 +110,18 @@ int main(int argc, char *argv[])
 
 
         label0 = gtk_label_new("The shortest path");
-        strcat(min_path[0], "<--the first");
-        label1 = gtk_label_new(min_path[0]);
-        strcat(min_path[1], "<--the second");
-        label2 = gtk_label_new(min_path[1]);
-        strcat(min_path[2], "<--the thrid");
-        label3 = gtk_label_new(min_path[2]);
+
+		strcpy(content, "the first:  ");
+        strcat(content, min_path[0]);
+        label1 = gtk_label_new(content);
+
+		strcpy(content, "the second: ");
+        strcat(content, min_path[1]);
+        label2 = gtk_label_new(content);
+
+		strcpy(content, "the thrid:  ");
+        strcat(content, min_path[2]);
+        label3 = gtk_label_new(content);
 
         hbox = gtk_hbox_new(TRUE, 5);
         vbox = gtk_vbox_new(TRUE, 10);
