@@ -1,2 +1,0 @@
-break /mnt/c/Users/w0lfzhang/Desktop/operating_system/mycat.c:41
-

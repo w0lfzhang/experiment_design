@@ -41,5 +41,8 @@ int main(int argc, char * argv[])
 		write(dest_fd, buffer, count);
 	}
 
+	free(buffer);
+	buffer = NULL;
+	
 	return 0;
 }

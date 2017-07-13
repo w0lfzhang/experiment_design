@@ -35,9 +35,13 @@ int main(int argc, char * argv[])
 	while( (count = read(fd, buffer, 10)) > 0 )  
 	{
 		printf("%d ", count);
-		write(1, buffer, 10);
+		write(1, buffer, count);
 	}
 	
 	printf("\n");
+
+	free(buffer);
+	buffer = NULL;
+	
 	return 0;
 }
